@@ -1,6 +1,7 @@
 /// @description controls Briquette movement
 key_left = keyboard_check(ord("A"));
 key_right = keyboard_check(ord("D"));
+key_jump_pressed = keyboard_check_pressed(vk_space);
 key_jump = keyboard_check(vk_space);
 
 if(key_left && !key_right){
@@ -24,21 +25,43 @@ else{ //no lateral movement
 }
 
 //y speed calculations
-if(key_jump){
-	y_spd = -3;
-	if (grounded == true){
-		alarm_set(0, 60);
-	}
+if(key_jump_pressed && grounded){
+	jumping = true;
+	alarm_set(0, 20);
+}
+else if(key_jump && jumping){
+	y_spd = -10;
 }else{
 	alarm[0] = -1;
-	y_spd += grav;
+	jumping = false;
+	if(y_spd >= grav){
+		y_spd += grav;
+	}else{
+		y_spd = grav;
+	}
 }
 
-x += x_spd; //apply speed to x position variable
+//grounded check
+if(place_meeting(x, y+1, wall)){
+	grounded = true;
+}else{
+	grounded = false;
+}
+
+if(place_meeting(x+x_spd, y, wall)){  //apply speed to x position variable
+	var x_small = x;
+	while(!place_meeting(x_small+sign(x_spd), y, wall)){
+		x_small += 1 * (x_spd/abs(x_spd));
+	}
+	x = x_small;
+	x_spd = 0;
+}
+x += x_spd;
+
 
 if(place_meeting(x, y+y_spd, wall)){
 	var y_small = y;
-	while(!(place_meeting(x, y_small, wall))){
+	while(!(place_meeting(x, y_small+sign(y_spd), wall))){
 		y_small += 1 * (y_spd/abs(y_spd));
 	}
 	y = y_small;

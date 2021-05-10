@@ -5,4 +5,6 @@ x_spd = 0; //left: - right: +
 y_spd = 0; //up: - down: +
 speed_cap = 9;
 grav = 1;
-grounded = true;
+
+grounded = true; //jumping checks
+jumping = false;

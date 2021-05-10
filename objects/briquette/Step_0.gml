@@ -26,9 +26,23 @@ else{ //no lateral movement
 //y speed calculations
 if(key_jump){
 	y_spd = -3;
+	if (grounded == true){
+		alarm_set(0, 60);
+	}
 }else{
+	alarm[0] = -1;
 	y_spd += grav;
 }
 
 x += x_spd; //apply speed to x position variable
-y += y_spd; //apply speed to y position variable
+
+if(place_meeting(x, y+y_spd, wall)){
+	var y_small = y;
+	while(!(place_meeting(x, y_small, wall))){
+		y_small += 1 * (y_spd/abs(y_spd));
+	}
+	y = y_small;
+	y_spd = 0;
+}else{
+	y += y_spd;
+}

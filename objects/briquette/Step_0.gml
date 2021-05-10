@@ -3,24 +3,44 @@ key_left = keyboard_check(ord("A"));
 key_right = keyboard_check(ord("D"));
 key_jump_pressed = keyboard_check_pressed(vk_space);
 key_jump = keyboard_check(vk_space);
+key_break = keyboard_check(ord("K"));
 
+//Left Movement
 if(key_left && !key_right){
-	x_spd -= acceleration;
+	if(key_break && grounded && x_spd < 0){
+		x_spd += 0.25;
+	}else{
+		x_spd -= acceleration;
+	}
 	if(x_spd < -1*speed_cap){
 		x_spd = -1 * speed_cap;
 	}
 }
-else if(key_right & !key_left){
-	x_spd += acceleration;
+
+//Right Movement
+else if(key_right && !key_left){
+	if(key_break && grounded && x_spd>0){
+		x_spd -= 0.25;
+	}else{
+		x_spd += acceleration;
+	}
 	if(x_spd > speed_cap){
 		x_spd = speed_cap;
 	}
-}
-else{ //no lateral movement
+//No lateral movement
+}else{
 	if (x_spd > 0) {
-		x_spd -= 1;
+		if(x_spd - 1 < 0){
+			x_spd = 0;
+		}else{
+			x_spd -= 1;
+		}
 	}else if(x_spd < 0){
-		x_spd += 1;
+		if(x_spd + 1 > 0){
+			x_spd = 0;
+		}else{
+			x_spd += 1;
+		}
 	}
 }
 

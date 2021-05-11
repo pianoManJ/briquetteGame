@@ -8,3 +8,6 @@ grav = 1;
 
 grounded = true; //jumping checks
 jumping = false;
+
+//create heat guage instance
+hGuage = instance_create_layer(50, 50, "ui_layer", heat_guage);

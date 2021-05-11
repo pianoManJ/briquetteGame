@@ -1,8 +1,8 @@
 /// @description controls Briquette movement
 key_left = keyboard_check(ord("A"));
 key_right = keyboard_check(ord("D"));
-key_jump_pressed = keyboard_check_pressed(vk_space);
-key_jump = keyboard_check(vk_space);
+key_jump_pressed = keyboard_check_pressed(ord("J"));
+key_jump = keyboard_check(ord("J"));
 key_break = keyboard_check(ord("K"));
 
 //Left Movement
@@ -88,4 +88,9 @@ if(place_meeting(x, y+y_spd, wall)){
 	y_spd = 0;
 }else{
 	y += y_spd;
+}
+
+//Calculating Heat
+if(key_break && grounded){
+	hGuage.heat += (abs(x_spd)*0.10);
 }

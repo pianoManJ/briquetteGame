@@ -1,11 +1,14 @@
 {
   "resources": [
     {"id":{"name":"heat_guage","path":"objects/heat_guage/heat_guage.yy",},"order":2,},
+    {"id":{"name":"briq_brake","path":"sprites/briq_brake/briq_brake.yy",},"order":4,},
+    {"id":{"name":"briq_idle","path":"sprites/briq_idle/briq_idle.yy",},"order":2,},
     {"id":{"name":"wall","path":"objects/wall/wall.yy",},"order":1,},
     {"id":{"name":"charges","path":"objects/charges/charges.yy",},"order":4,},
-    {"id":{"name":"briq_idle","path":"sprites/briq_idle/briq_idle.yy",},"order":0,},
+    {"id":{"name":"briq_idle_temp","path":"sprites/briq_idle_temp/briq_idle_temp.yy",},"order":0,},
     {"id":{"name":"o_camera","path":"objects/o_camera/o_camera.yy",},"order":3,},
     {"id":{"name":"temp_wall","path":"sprites/temp_wall/temp_wall.yy",},"order":1,},
+    {"id":{"name":"briq_run","path":"sprites/briq_run/briq_run.yy",},"order":3,},
     {"id":{"name":"briquette","path":"objects/briquette/briquette.yy",},"order":0,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],

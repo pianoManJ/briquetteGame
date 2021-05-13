@@ -6,6 +6,12 @@ key_jump = keyboard_check(ord("J"));
 key_break = keyboard_check(ord("K"));
 key_ig = keyboard_check_pressed(ord("H"));
 
+if (grounded) {
+	acceleration = ground_accel;
+} else {
+	acceleration = air_accel;
+}
+
 //Left Movement
 if(key_left && !key_right){
 	if(key_break && grounded && x_spd < 0){
@@ -13,11 +19,10 @@ if(key_left && !key_right){
 	}else{
 		x_spd -= acceleration;
 	}
-	if(x_spd < -1*speed_cap){
+	if(x_spd < -1*speed_cap && grounded){
 		x_spd = -1 * speed_cap;
 	}
 }
-
 //Right Movement
 else if(key_right && !key_left){
 	if(key_break && grounded && x_spd>0){
@@ -25,7 +30,7 @@ else if(key_right && !key_left){
 	}else{
 		x_spd += acceleration;
 	}
-	if(x_spd > speed_cap){
+	if(x_spd > speed_cap && grounded){
 		x_spd = speed_cap;
 	}
 //No lateral movement
@@ -47,26 +52,41 @@ else if(key_right && !key_left){
 
 //y speed calculations
 if(key_jump_pressed && grounded){
-	jumping = true;
-	alarm_set(0, 20);
+	if (groundboost) {
+		x_spd = sign(x_spd)*30;
+		y_spd = -20;
+		groundboost = false;
+		airboost = true;
+		jumping = false;
+		alarm[1] = -1;
+	}else{
+		jumping = true;
+		alarm_set(0, 20);
+	}
 }
 else if(key_jump && jumping){
 	y_spd = -10;
 }else{
 	alarm[0] = -1;
 	jumping = false;
-	if(y_spd >= grav){
+	if(y_spd >= grav || airboost){
 		y_spd += grav;
 	}else{
 		y_spd = grav;
 	}
 }
 
-//grounded check
-if(place_meeting(x, y+1, wall)){
-	grounded = true;
-}else{
-	grounded = false;
+//charge actions
+if(key_ig && hGuage.player_charges.charge_count > 0){
+	instance_create_layer(x, y, "ui_layer", flame);
+	if(!grounded && !jumping){
+		airboost = true;
+		y_spd = -10;
+	}else if (grounded && x_spd != 0){
+		groundboost = true;
+		alarm_set(1, 20);
+	}
+	hGuage.player_charges.charge_count --;
 }
 
 if(place_meeting(x+x_spd, y, wall)){  //apply speed to x position variable
@@ -89,6 +109,14 @@ if(place_meeting(x, y+y_spd, wall)){
 	y_spd = 0;
 }else{
 	y += y_spd;
+}
+
+//grounded check
+if(place_meeting(x, y+1, wall)){
+	airboost = false;
+	grounded = true;
+}else{
+	grounded = false;
 }
 
 //Calculating Heat
@@ -114,7 +142,3 @@ if(x_spd != 0){
 	image_xscale = sign(x_spd);
 }
 
-if(key_ig && hGuage.player_charges.charge_count > 0){
-	instance_create_layer(x, y, "ui_layer", flame);
-	hGuage.player_charges.charge_count --;
-}

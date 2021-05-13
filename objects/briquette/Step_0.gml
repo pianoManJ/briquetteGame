@@ -4,6 +4,7 @@ key_right = keyboard_check(ord("D"));
 key_jump_pressed = keyboard_check_pressed(ord("J"));
 key_jump = keyboard_check(ord("J"));
 key_break = keyboard_check(ord("K"));
+key_ig = keyboard_check_pressed(ord("H"));
 
 //Left Movement
 if(key_left && !key_right){
@@ -93,4 +94,27 @@ if(place_meeting(x, y+y_spd, wall)){
 //Calculating Heat
 if(key_break && grounded){
 	hGuage.heat += (abs(x_spd)*0.10);
+}
+
+//Sprite Control
+if(grounded){
+	if(key_break){
+		sprite_index = briq_brake;
+	}else if(abs(x_spd) > 0){
+		sprite_index = briq_run;
+	}else{
+		sprite_index = briq_idle;
+	}
+}else{
+	sprite_index = briq_idle;
+}
+
+//direction control
+if(x_spd != 0){
+	image_xscale = sign(x_spd);
+}
+
+if(key_ig && hGuage.player_charges.charge_count > 0){
+	instance_create_layer(x, y, "ui_layer", flame);
+	hGuage.player_charges.charge_count --;
 }

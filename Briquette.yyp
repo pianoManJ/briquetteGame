@@ -12,6 +12,7 @@
     {"id":{"name":"heat_merc","path":"sprites/heat_merc/heat_merc.yy",},"order":7,},
     {"id":{"name":"temp_wall","path":"sprites/temp_wall/temp_wall.yy",},"order":1,},
     {"id":{"name":"briq_run","path":"sprites/briq_run/briq_run.yy",},"order":3,},
+    {"id":{"name":"charge_spr","path":"sprites/charge_spr/charge_spr.yy",},"order":8,},
     {"id":{"name":"briquette","path":"objects/briquette/briquette.yy",},"order":0,},
     {"id":{"name":"flame","path":"objects/flame/flame.yy",},"order":5,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},

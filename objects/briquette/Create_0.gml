@@ -2,7 +2,7 @@
 // You can write your code in this editor
 acceleration = 1;
 ground_accel = 1;
-air_accel = 0.25;
+air_accel = 0.75;
 x_spd = 0; //left: - right: +
 y_spd = 0; //up: - down: +
 speed_cap = 10;

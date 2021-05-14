@@ -19,7 +19,7 @@ if(key_left && !key_right){
 	}else{
 		x_spd -= acceleration;
 	}
-	if(x_spd < -1*speed_cap && grounded){
+	if(x_spd < -1*speed_cap && !airboost){
 		x_spd = -1 * speed_cap;
 	}
 }
@@ -30,7 +30,7 @@ else if(key_right && !key_left){
 	}else{
 		x_spd += acceleration;
 	}
-	if(x_spd > speed_cap && grounded){
+	if(x_spd > speed_cap && !airboost){
 		x_spd = speed_cap;
 	}
 //No lateral movement
@@ -53,7 +53,7 @@ else if(key_right && !key_left){
 //y speed calculations
 if(key_jump_pressed && grounded){
 	if (groundboost) {
-		x_spd = sign(x_spd)*30;
+		x_spd = sign(x_spd)*20;
 		y_spd = -20;
 		groundboost = false;
 		airboost = true;
@@ -81,7 +81,8 @@ if(key_ig && hGuage.player_charges.charge_count > 0){
 	instance_create_layer(x, y, "ui_layer", flame);
 	if(!grounded && !jumping){
 		airboost = true;
-		y_spd = -10;
+		y_spd = -15;
+		x_spd = 0;
 	}else if (grounded && x_spd != 0){
 		groundboost = true;
 		alarm_set(1, 20);

@@ -1,9 +1,15 @@
 /// @description Insert description here
 var camX = camera_get_view_x(camera);
 var camY = camera_get_view_y(camera);
-
-var targetX = briquette.x - RES_W/2;
-var targetY = briquette.y - RES_H/2;
+var targetX;
+var targetY;
+if (instance_exists(briquette)){
+	targetX = briquette.x - RES_W/2;
+	targetY = briquette.y - RES_H/2;
+}else{
+	targetX = 0;
+	targetY = 0;
+}
 
 targetX = clamp(targetX, 0, room_width - RES_W);
 targetY = clamp(targetY, 0, room_height - RES_H);

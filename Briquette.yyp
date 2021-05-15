@@ -8,6 +8,7 @@
     {"id":{"name":"flame_ground","path":"sprites/flame_ground/flame_ground.yy",},"order":5,},
     {"id":{"name":"charges","path":"objects/charges/charges.yy",},"order":4,},
     {"id":{"name":"briq_idle_temp","path":"sprites/briq_idle_temp/briq_idle_temp.yy",},"order":0,},
+    {"id":{"name":"o_controller","path":"objects/o_controller/o_controller.yy",},"order":7,},
     {"id":{"name":"o_camera","path":"objects/o_camera/o_camera.yy",},"order":3,},
     {"id":{"name":"level1","path":"rooms/level1/level1.yy",},"order":1,},
     {"id":{"name":"heat_merc","path":"sprites/heat_merc/heat_merc.yy",},"order":7,},

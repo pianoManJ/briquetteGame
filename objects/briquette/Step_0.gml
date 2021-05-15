@@ -19,7 +19,7 @@ if(key_left && !key_right){
 	}else{
 		x_spd -= acceleration;
 	}
-	if(x_spd < -1*speed_cap && !airboost){
+	if(x_spd < -1*speed_cap && !launched){
 		x_spd = -1 * speed_cap;
 	}
 }
@@ -30,7 +30,7 @@ else if(key_right && !key_left){
 	}else{
 		x_spd += acceleration;
 	}
-	if(x_spd > speed_cap && !airboost){
+	if(x_spd > speed_cap && !launched){
 		x_spd = speed_cap;
 	}
 //No lateral movement
@@ -56,7 +56,7 @@ if(key_jump_pressed && grounded){
 		x_spd = sign(x_spd)*20;
 		y_spd = -20;
 		groundboost = false;
-		airboost = true;
+		launched = true;
 		jumping = false;
 		alarm[1] = -1;
 	}else{
@@ -69,7 +69,7 @@ else if(key_jump && jumping){
 }else{
 	alarm[0] = -1;
 	jumping = false;
-	if(y_spd >= grav || airboost){
+	if(y_spd >= grav || airboost || launched){
 		y_spd += grav;
 	}else{
 		y_spd = grav;
@@ -82,7 +82,7 @@ if(key_ig && hGuage.player_charges.charge_count > 0){
 	if(!grounded && !jumping){
 		airboost = true;
 		y_spd = -15;
-		x_spd = 0;
+		//x_spd = 0;
 	}else if (grounded && x_spd != 0){
 		groundboost = true;
 		alarm_set(1, 20);
@@ -115,6 +115,7 @@ if(place_meeting(x, y+y_spd, wall)){
 //grounded check
 if(place_meeting(x, y+1, wall)){
 	airboost = false;
+	launched = false;
 	grounded = true;
 }else{
 	grounded = false;
@@ -122,7 +123,10 @@ if(place_meeting(x, y+1, wall)){
 
 //Calculating Heat
 if(key_break && grounded){
-	hGuage.heat += (abs(x_spd)*0.10);
+	hGuage.heat += (abs(x_spd)*0.30);
+}
+if(place_meeting(x,y, rest_fire)){
+	hGuage.heat += 1;
 }
 
 //Sprite Control
@@ -142,4 +146,3 @@ if(grounded){
 if(x_spd != 0){
 	image_xscale = sign(x_spd);
 }
-

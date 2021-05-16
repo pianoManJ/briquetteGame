@@ -84,9 +84,10 @@ else if((key_jump && jumping) && !is_ceiling){
 //charge actions
 if(key_ig && hGuage.player_charges.charge_count > 0){
 	instance_create_layer(x, y, "walls", flame);
-	if(!grounded && !jumping){
+	if(!grounded){
 		airboost = true;
 		y_spd = -15;
+		jumping = false;
 		//x_spd = 0;
 	}else if (grounded && x_spd != 0){
 		groundboost = true;

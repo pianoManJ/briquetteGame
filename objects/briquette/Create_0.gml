@@ -14,6 +14,7 @@ groundboost = false;
 launched = false;
 grounded = true; //jumping checks
 jumping = false;
+is_ceiling = false;
 
 //create heat guage instance
 hGuage = instance_create_layer(80, 200, "ui_layer", heat_guage);

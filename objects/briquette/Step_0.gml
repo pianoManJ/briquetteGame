@@ -12,6 +12,11 @@ if (grounded) {
 	acceleration = air_accel;
 }
 
+if (launched) {
+	speed_cap = 20;
+}else{
+	speed_cap = 10;
+}
 //Left Movement
 if(key_left && !key_right){
 	if(key_break && grounded && x_spd < 0){
@@ -19,7 +24,7 @@ if(key_left && !key_right){
 	}else{
 		x_spd -= acceleration;
 	}
-	if(x_spd < -1*speed_cap && !launched){
+	if(x_spd < -1*speed_cap){
 		x_spd = -1 * speed_cap;
 	}
 }
@@ -30,7 +35,7 @@ else if(key_right && !key_left){
 	}else{
 		x_spd += acceleration;
 	}
-	if(x_spd > speed_cap && !launched){
+	if(x_spd > speed_cap){
 		x_spd = speed_cap;
 	}
 //No lateral movement
@@ -64,7 +69,7 @@ if(key_jump_pressed && grounded){
 		alarm_set(0, 20);
 	}
 }
-else if(key_jump && jumping){
+else if((key_jump && jumping) && !is_ceiling){
 	y_spd = -10;
 }else{
 	alarm[0] = -1;
@@ -78,7 +83,7 @@ else if(key_jump && jumping){
 
 //charge actions
 if(key_ig && hGuage.player_charges.charge_count > 0){
-	instance_create_layer(x, y, "ui_layer", flame);
+	instance_create_layer(x, y, "walls", flame);
 	if(!grounded && !jumping){
 		airboost = true;
 		y_spd = -15;
@@ -119,6 +124,12 @@ if(place_meeting(x, y+1, wall)){
 	grounded = true;
 }else{
 	grounded = false;
+}
+
+if(place_meeting(x, y-1, wall)){
+	is_ceiling = true;
+}else{
+	is_ceiling = false;
 }
 
 //Calculating Heat

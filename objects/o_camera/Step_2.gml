@@ -7,8 +7,8 @@ if (instance_exists(briquette)){
 	targetX = briquette.x - RES_W/2;
 	targetY = briquette.y - RES_H/2;
 }else{
-	targetX = 0;
-	targetY = 0;
+	targetX = camX;
+	targetY = camY;
 }
 
 targetX = clamp(targetX, 0, room_width - RES_W);

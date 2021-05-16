@@ -38,7 +38,7 @@ if(current_gamestate = gamestate.GAME_PLAY){
 			draw_text(830, 420, "Press 'J' to Jump");
 			draw_text(1116, 420, "Hold 'J' to increase jump height");
 			draw_text(4095, 288, "Rest at the fire to build heat.\nWhen the HEAT GAUGE is filled, you gain a CHARGE.");
-			draw_text(4830, 546, "Light the grill to beat the level.\nTo IGNITE, press 'H'");
+			draw_text(4830, 546, "Light the grill to beat the level.\nTo IGNITE, press 'H'\n(Costs one CHARGE)");
 			break;
 		case "level_2":
 			draw_set_font(directions_font);

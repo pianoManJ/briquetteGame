@@ -31,6 +31,7 @@ if(key_enter){
 	show_debug_message("enter_was_pressed")
 	switch (current_gamestate) {
 		case gamestate.GAME_START:
+			current_gamestate = gamestate.GAME_PLAY;
 			show_debug_message("game start");
 			break;
 		case gamestate.GAME_PLAY:
@@ -38,18 +39,15 @@ if(key_enter){
 			break;
 		case gamestate.GAME_WIN:
 			show_debug_message("game win");
+			room_goto_next();
 			break;
 		case gamestate.GAME_OVER:
+			current_gamestate = gamestate.GAME_START;
+			room_restart();
 			show_debug_message("game over");
 			break;
 		default:
 			show_debug_message("default");
 			break;
-	}
-	if(current_gamestate == gamestate.GAME_START){
-		current_gamestate = gamestate.GAME_PLAY;
-	}else if(current_gamestate == gamestate.GAME_OVER){
-		current_gamestate = gamestate.GAME_START;
-		room_restart();
 	}
 }
